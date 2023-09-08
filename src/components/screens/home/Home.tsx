@@ -1,58 +1,11 @@
 import {ChangeEventHandler, FC, KeyboardEventHandler, useEffect, useRef, useState} from "react";
 import Image from "next/image";
 import {Inter} from 'next/font/google'
+import Link from "next/link";
 
 const inter = Inter({subsets: ['latin']})
 
 const HomePage: FC = () => {
-    const [startTime, setStartTime] = useState<number>(0);
-    const [now, setNow] = useState<number>(0);
-    const [value, setValue] = useState('');
-    const btnRef = useRef(null);
-    const inputRef = useRef<HTMLInputElement>(null);
-
-
-    function handleStart() {
-        setStartTime(Date.now());
-        setNow(Date.now());
-
-        setInterval(() => {
-            setNow(Date.now());
-        }, 10);
-    }
-
-    let secondsPassed = 0;
-    if (startTime != 0 && now != 0) {
-        secondsPassed = (now - startTime) / 1000;
-    }
-
-    const handleChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-        setValue(e.target.value)
-    }
-
-    useEffect(() => {
-        if (inputRef.current != null) {
-            inputRef.current.focus();
-        }
-    })
-
-    const handleKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
-        if (inputRef.current != null && e.key == "Enter") {
-            alert(inputRef.current.value)
-        }
-    }
-
-    return (
-        <>
-            <h1>Time passed: {secondsPassed.toFixed(3)}</h1>
-            <button onClick={handleStart} ref={btnRef}>
-                Start
-            </button>
-            <input value={value} onChange={handleChange} onKeyDown={handleKeyDown} ref={inputRef}/>
-
-        </>
-    );
-
     return <main
         className={`flex min-h-screen flex-col items-center justify-between p-24 ${inter.className}`}
     >
@@ -93,7 +46,9 @@ const HomePage: FC = () => {
                 priority
             />
         </div>
-
+        <h1 className="mb-3 text-2xl font-semibold">
+            Read <Link href="/about">this page!</Link>
+        </h1>
         <div className="mb-32 grid text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-4 lg:text-left">
             <a
                 href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=default-template-tw&utm_campaign=create-next-app"
