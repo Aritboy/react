@@ -1,7 +1,6 @@
 import Layout from "@/components/layout/Layout";
 import {NextPage} from "next";
 import {GetStaticPaths, GetStaticProps} from 'next'
-import {ParsedUrlQuery} from "querystring";
 import {getAllPostIds, getPostData} from "../../../lib/posts";
 import Head from "next/head";
 
@@ -14,7 +13,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
 }
 
 export const getStaticProps: GetStaticProps = async ({params}) => {
-    const postData = await getPostData(params?.id);
+    const postData = await getPostData(params?.id as string);
     return {
         props: {
             postData,
@@ -43,7 +42,7 @@ const Post: NextPage<PostData> = ({postData}) => {
         {postData.date}
         <div dangerouslySetInnerHTML={{ __html: postData.contentHtml }} />
         <form method={'POST'} action="http://localhost:3000/api/hello">
-            <input name={'title'} value={"asdads"}/>
+            <input name={'title'} value={"asdads"} onChange={()=>{}}/>
             <button type={'submit'}>POST</button>
         </form>
     </Layout>;

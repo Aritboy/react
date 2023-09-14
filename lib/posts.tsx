@@ -70,7 +70,7 @@ export function getAllPostIds() : FileIdProps[] {
     });
 }
 
-export async function getPostData(id: string | string[] | undefined) : Promise<FileProps> {
+export async function getPostData(id: string) : Promise<FileProps> {
     const fullPath = path.join(postsDirectory, `${id}.md`);
     const fileContents = fs.readFileSync(fullPath, 'utf8');
 

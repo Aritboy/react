@@ -1,17 +1,16 @@
 import {ChangeEventHandler, FC, KeyboardEventHandler, useEffect, useRef, useState} from "react";
-import Image from "next/image";
 import {Inter} from 'next/font/google'
 import Link from "next/link";
 import Head from "next/head";
-import Script from 'next/script';
 import Layout from "@/components/layout/Layout";
 import {FileProps, getSortedPostsData} from "../../lib/posts";
-import { GetStaticProps } from 'next'
+import {GetStaticProps} from 'next'
 
 const inter = Inter({subsets: ['latin']})
 
 export const getStaticProps: GetStaticProps = async () => {
     const allPostsData = getSortedPostsData();
+
     return {
         props: {
             allPostsData,
@@ -29,7 +28,6 @@ const AboutPage: FC<TestINT> = ({allPostsData}) => {
     const [value, setValue] = useState('');
     const btnRef = useRef(null);
     const inputRef = useRef<HTMLInputElement>(null);
-
 
     function handleStart() {
         setStartTime(Date.now());
@@ -74,12 +72,12 @@ const AboutPage: FC<TestINT> = ({allPostsData}) => {
             <h2>
                 <Link href="/">Back to home sad</Link>
             </h2>
-            {allPostsData.map(({ id, date, title }) => (
+            {allPostsData.map(({id, date, title}) => (
                 <li key={id}>
                     <Link href={`/posts/${id}`}>{title}</Link>
-                    <br />
+                    <br/>
                     {id}
-                    <br />
+                    <br/>
                     {date}
                 </li>
             ))}
